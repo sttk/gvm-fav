@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+. "$GVM_ROOT/scripts/env/gvm"
+. "$GVM_ROOT/scripts/env/use"
+
+command="go test -cover ./..."
+
+current=$(gvm list | grep '=> ' | sed 's/^.* go/go/')
+
+for g in $(gvm list | tail -n +4 | sed 's/^.* go/go/'); do
+  gvm_use "${g}"
+  go version
+  go clean -cache -testcache
+  ${command}
+  exitcd=$?
+  echo ""
+  if [[ ${exitcd} -gt 0 ]]; then
+    read -p "Continue? (Y/n) " userinput
+    if [ "$(echo ${userinput} | tr '[:upper:]' '[:lower:]')" == "n" ]; then
+      break
+    fi
+  fi
+done
+
+echo "Back to ${current}"
+gvm_use ${current}
+
