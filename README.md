@@ -6,7 +6,7 @@ go-fav is a script to run the command `go test -cover ./...` for local available
 ## Usage
 
 ```
-$ gvm-fav
+$ gvm-fav [option]
 ```
 
 
