@@ -3,7 +3,7 @@
 . "$GVM_ROOT/scripts/env/gvm"
 . "$GVM_ROOT/scripts/env/use"
 
-command="go test -cover ./..."
+command="go test $1 -cover ./..."
 
 current=$(gvm list | grep '=> ' | sed 's/^.* go/go/')
 
