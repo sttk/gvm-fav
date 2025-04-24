@@ -3,9 +3,9 @@
 . "$GVM_ROOT/scripts/env/gvm"
 . "$GVM_ROOT/scripts/env/use"
 
-command="go test $1 -cover ./..."
+readonly command="go test $1 -cover ./..."
 
-current=$(gvm list | grep '=> ' | sed 's/^.* go/go/')
+readonly current=$(gvm list | grep '=> ' | sed 's/^.* go/go/')
 
 for g in $(gvm list | tail -n +4 | sed 's/^.* go/go/'); do
   gvm_use "${g}"
